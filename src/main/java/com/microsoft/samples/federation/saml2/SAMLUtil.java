@@ -46,7 +46,7 @@ public class SAMLUtil {
 		            NodeList list = doc.getElementsByTagName("samlp:Response");
 		            Element node = (Element)list.item(0);
 		            String redirectUrl = (String) node.getAttribute("Destination");
-		            System.out.println("res ->" + redirectUrl);
+		            System.out.println("redirectUrl ->" + redirectUrl);
 		            return redirectUrl;
 			} catch (ParserConfigurationException e) {
 				// TODO Auto-generated catch block

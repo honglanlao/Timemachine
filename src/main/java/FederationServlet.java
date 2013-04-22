@@ -19,7 +19,7 @@ public class FederationServlet extends HttpServlet {
 		
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
+		System.out.println("request url ->" +  ((HttpServletRequest)request).getRequestURL().toString());
 		Enumeration<String> en =  request.getParameterNames();
 		
 		while(en.hasMoreElements()) {
@@ -29,17 +29,22 @@ public class FederationServlet extends HttpServlet {
 		
 		 
 		String token = "";
-		if(request.getParameter("SAMLResponse") == null){
-			token = request.getParameter("wresult").toString();
-		}else{
-			token = request.getParameter("SAMLResponse").toString();
-			// base64 decode token
-			token =  new String(Base64.decodeBase64(token));
-		}
-		System.out.println("token returned ->" + token); 
+	//	if(request.getParameter("SAMLResponse") == null){
+	//		token = request.getParameter("wresult").toString();
+	//	}else{
+		token = request.getParameter("SAMLResponse");
 		if (token == null) {
 			response.sendError(400, "You were supposed to send a wresult parameter with a token");
+		}else{
+			token = token.toString();
 		}
+			// base64 decode token
+		
+		System.out.println("before decoding 64 ->" + token); 
+		token =  new String(Base64.decodeBase64(token));
+	//	}
+		System.out.println("token returned ->" + token); 
+		
 		
 		FederatedLoginManager loginManager = FederatedLoginManager.fromRequest(request, new SampleAuthenticationListener());
 
@@ -52,6 +57,11 @@ public class FederationServlet extends HttpServlet {
 		
 		System.out.println("in FederationServlet do Post, auth success, now check next step");
 
+	}
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		doPost(request, response);
 	}
 	
 	private class SampleAuthenticationListener implements FederatedAuthenticationListener {
