@@ -1,0 +1,6 @@
+federation.trustedissuers.issuer=https://accounts.accesscontrol.windows-ppe.net/timecardsample.ccsctp.net/v2/wsfederation
+federation.trustedissuers.thumbprint=e9afc0cd4b705d25d2c81a62bcb219d324a39712
+federation.trustedissuers.friendlyname=Time Machine
+federation.audienceuris=spn:6015c885-f649-46e1-a06e-2383d1dc91b5
+federation.realm=spn:6015c885-f649-46e1-a06e-2383d1dc91b5
+federation.reply=https://localhost:8443/sample/wsfed-saml

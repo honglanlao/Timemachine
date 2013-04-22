@@ -1,0 +1,203 @@
+@charset "gb2312";
+
+.main{
+	background:url(/template/english/images/default_bg.jpg) 50% 1px no-repeat;
+	width:1440px;
+	width:auto;
+	height:625px;
+	overflow:hidden;
+	margin:0 auto;
+}
+.main .container{
+	position:relative;
+	width:1002px;
+	margin:0 auto;
+	background:url(/template/english/images/bodybg.png) repeat-y;
+}
+.main .banner{
+	height:570px;
+	overflow:hidden;
+	margin:0 auto;
+	text-align:center;
+	
+}
+.main .news-box{
+	position:absolute;
+	top:50px;
+	left:620px;
+	width:341px;
+	background:url(/template/english/images/background.png) 0px -858px no-repeat;
+	background:url(/template/english/images/news_top_bg.png) no-repeat;
+	padding-top:11px;
+}
+.news-box .news-tab{
+	background:#ac6303;
+	padding:0px 8px;
+	height:20px;
+	margin:5px 0px;
+	font-weight:100;
+	float:left;
+	margin-right:5px;
+}
+.news-box .news-tab-active{
+	background:#e58100;
+}
+.news-box .news-tab-hover{
+	background:#c26e02;
+}
+.news-box .news-tab a{
+	color:#FFF;
+}
+.news-box .news-list{
+	clear:both;
+	display:none;
+}
+.news-box .list-show{
+	display:block;
+}
+.news-box .news-list li{
+	line-height:17px;
+	height:38px;
+	overflow:hidden;
+	background:url(/template/english/images/background.png) 0px -353px repeat-x;
+}
+.news-box .news-list li div{
+	width:40px;
+	height:38px;
+	float:left;
+	color:#e58100;
+	text-align:center;
+}
+.news-box .news-list li span{
+	display:block;
+	color:#780900;
+	font-weight:bold;
+}
+.news-box .news-list .news-more{
+	text-align:right;
+	padding-bottom:3px;
+	clear:both;
+}
+.news-box .news-list .news-more a{
+	color:#c87202;
+	padding-right:10px;
+	background:url(/template/english/images/icon4.png) right center no-repeat;
+}
+.news-box .news-box-bottom{
+	background:url(/template/english/images/background.png) 0px -392px no-repeat;
+	background:url(/template/english/images/news_bottom_bg.png) no-repeat;
+	height:9px;
+	overflow:hidden;
+}
+.news-box .news-box-main{
+	background:url(/template/english/images/news_bg.png) repeat-y;
+	background:url(/template/english/images/news_bg.png) repeat-y;
+	padding:0px 18px;
+}
+.news-box .news-top{
+	background:#e58100;
+	padding:10px 15px;
+	
+}
+.news-box .news-top .container{
+	overflow:hidden;
+	width:275px;
+	height:223px;
+	background:none;
+}
+.news-top .news-pic{
+	float:left;
+	width:275px;
+	height:223px;
+}
+#news_pic{
+}
+#news_pic img{
+	width:275px;
+	height:155px;
+}
+.news-top .news-pic .news-content{
+	line-height:140%;
+}
+.news-top .news-pic .news-content p{
+	color:#912300;
+	font-weight:bold;
+	margin:0px;
+	padding:0px;
+	height:20px;
+	line-height:20px;
+}
+.news-pic a:hover{
+	text-decoration:underline;
+}
+.news-top #news_icon{
+	height:7px;
+	
+	float:right;
+}
+.news-top  #news_icon li{
+	background:url(/template/english/images/background.png) -277px -449px no-repeat;
+	width:7px;
+	height:7px;
+	_width:6px;
+	overflow:hidden;
+float:left;
+	margin-left:3px;
+	cursor:pointer;
+}
+.news-top  #news_icon li.icon-hover{
+	background:url(/template/english/images/background.png) -285px -449px no-repeat;
+}
+.news-box .news-bottom{
+	background:url(/template/english/images/news_bg_1.jpg) #ac6304 repeat-x;
+	padding:0px 18px;
+	overflow:hidden;
+}
+.news-box .news-bottom .news-tabs{
+	overflow:hide;
+	_margin-bottom:4px;
+}
+.news-box .news-bottom .news-tabs:after{
+	display:block;
+	content:"";
+	clear:both;
+}
+.main .subnav{
+	background: url(/template/english/images/subnav_bg.png) repeat;
+	height:70px;
+	position:absolute;
+	bottom:1px;
+	left:7px;
+	width:988px;
+	font-size:14px;
+}
+.main .subnav .subnav-left{
+	width:300px;
+	padding:5px 0px 0px 20px;
+}
+.main .subnav .subnav-left li{
+	float:left;
+	width:130px;
+	background:url(/template/english/images/icon4.png) left center no-repeat;
+	padding-left:15px;
+	line-height:20px;
+	white-space:nowrap;
+}
+.main .subnav .subnav-left li a{
+	color:#e58100;
+}
+.main .subnav .subnav-right{
+	position:absolute;
+	top:5px;
+	left:620px;
+}
+.main .subnav .subnav-right li{
+	background:url(/template/english/images/icon2.png) left center no-repeat;
+	line-height:30px;
+	padding-left:20px;
+}
+.main .subnav .subnav-right li a{
+	color:#FFF;
+}
+
+
