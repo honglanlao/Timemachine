@@ -31,9 +31,14 @@ import java.security.Principal;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.microsoft.samples.federation.saml2.Claim;
 
 public class FederatedPrincipal implements Principal {
+	
+	private static Logger logger  = Logger.getLogger(FederatedPrincipal.class);
+
 	
 	private static final String ObjectIdClaimType = "http://schemas.microsoft.com/identity/claims/objectidentifier";
 	private static final String TenantidClaimType = "http://schemas.microsoft.com/identity/claims/tenantid";  	
@@ -82,7 +87,7 @@ public class FederatedPrincipal implements Principal {
 					tenantid = claim.getClaimValue();
 			}			
 		}
-		System.out.println("in federated principal, tenantid ->" + tenantid );
+		logger.info("in federated principal, tenantid ->" + tenantid );
 		return tenantid;
 	}
 	

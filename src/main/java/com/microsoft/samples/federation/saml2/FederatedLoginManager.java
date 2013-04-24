@@ -37,10 +37,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 
+import com.microsoft.azure.activedirectory.sampleapp.helper.JSONHelper;
 import com.microsoft.samples.federation.saml2.Claim;
 import com.microsoft.samples.federation.saml2.FederatedAuthenticationListener;
 import com.microsoft.samples.federation.saml2.FederatedPrincipal;
@@ -54,6 +56,8 @@ public class FederatedLoginManager {
 	
 	private HttpServletRequest request;
 	private FederatedAuthenticationListener listener;
+	
+	private static Logger logger  = Logger.getLogger(FederatedLoginManager.class);
 
 	public static FederatedLoginManager fromRequest(HttpServletRequest request) {
 		return fromRequest(request, null);
@@ -98,11 +102,12 @@ public class FederatedLoginManager {
 	}
 
 	public final void authenticate(String token, HttpServletResponse response) throws FederationException {
+		logger.info("in authenticate login manager");
+
 		List<Claim> claims = null;
 
 		try {
 			SamlTokenValidator validator = new SamlTokenValidator();
-			System.out.println("in authenticate login manager");
 			this.setTrustedIssuers(validator);
 			
 			this.setAudienceUris(validator);
@@ -117,7 +122,7 @@ public class FederatedLoginManager {
 			if (listener != null) listener.OnAuthenticationSucceed(principal);
 			
 		//	String wctx = request.getParameter("wctx");
-		//	System.out.println("wctx ->" + wctx);
+		//	logger.info("wctx ->" + wctx);
 		
 			String redirectUrl = SAMLUtil.getRedirectUrl(token);
 			response.setHeader("Location", redirectUrl);
@@ -185,10 +190,10 @@ public class FederatedLoginManager {
 		String stsSamlUrl = FederatedConfiguration.getInstance().getStsSamlUrl();
 	//	String consumerUrl  = FederatedConfiguration.getInstance().getReply();
 		String issuerUrl  = FederatedConfiguration.getInstance().getRealm();
-		System.out.println("returnURL ->" + returnURL);
+		logger.info("returnURL ->" + returnURL);
 		String federatedLoginURL = new SAMLConsumer(stsSamlUrl).buildRequestMessage(issuerUrl, "https://localhost:8443/sample/wsfed-saml");
 
-		System.out.println("federatedLoginURL ->" + federatedLoginURL);
+		logger.info("federatedLoginURL ->" + federatedLoginURL);
 //		String encodedRequest = (returnURL != null) ? URLUTF8Encoder.encode(returnURL) : "";
 
 //		String federatedLoginURL = FederatedConfiguration.getInstance()

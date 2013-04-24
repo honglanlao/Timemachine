@@ -14,11 +14,13 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.microsoft.azure.activedirectory.sampleapp.models.User;
 import com.microsoft.azure.activedirectory.sampleapp.models.UserList;
+import com.microsoft.windowsazure.activedirectory.sample.timemachine.controllers.AuthServlet;
 import com.microsoft.windowsazure.activedirectory.sample.timemachine.dao.UserDao;
 import com.microsoft.windowsazure.activedirectory.sample.timemachine.dao.UserDaoList;
 
@@ -27,6 +29,8 @@ import com.microsoft.windowsazure.activedirectory.sample.timemachine.dao.UserDao
  * 
  */
 public class DbHelper {
+	
+	private static Logger logger  = Logger.getLogger(DbHelper.class);
 
 	/**
 	 * @param tableName
@@ -48,7 +52,7 @@ public class DbHelper {
 			}
 			// append the last AND
 			sql += columns.get(i) + "='" + values.get(i) + "';";
-			System.out.println("sql ->" + sql);
+			logger.info("sql ->" + sql);
 		}else if(columns == null && values == null){
 		}else{
 			try {
@@ -77,7 +81,7 @@ public class DbHelper {
 		if(column != null && value != null){
 			// append the last AND
 			sql += " WHERE " + column + "='" + value + "';";
-			System.out.println("sql ->" + sql);
+			logger.info("sql ->" + sql);
 		}else if(column == null && value == null){
 		}else{
 			try {
@@ -105,7 +109,7 @@ public class DbHelper {
 		try {
 			if(rs.next() == false) return null;
 
-			System.out.println(columnAttribute + " ->" + rs.getString(columnAttribute));
+			logger.info(columnAttribute + " ->" + rs.getString(columnAttribute));
 			attr = "";
 		
 			attr = rs.getString(columnAttribute);
@@ -132,7 +136,7 @@ public class DbHelper {
 		try {
 			if(rs.next() == false) return null;
 
-			System.out.println(columnAttribute + " ->" + rs.getString(columnAttribute));
+			logger.info(columnAttribute + " ->" + rs.getString(columnAttribute));
 			attr = "";
 		
 			attr = rs.getString(columnAttribute);
@@ -159,7 +163,7 @@ public class DbHelper {
 			                "ELSE  " +
 			                "SELECT 'does not exist.'";
 		
-		System.out.println("sqlString ->" + sqlString);
+		logger.info("sqlString ->" + sqlString);
 		ResultSet rs = DbBean.getResultSet(stmt, sqlString);
 		try {
 			while (rs.next()) {
@@ -236,7 +240,7 @@ public class DbHelper {
 		sqlString += " VALUES('" + objectId + "', '" + upn + "', '" + displayName + "', '" + givenName + "', '" +  surName;
 		sqlString += "')";
 		
-		System.out.println("sqlString =>" + sqlString);
+		logger.info("sqlString =>" + sqlString);
 		return sqlString;
 	
 	}
@@ -260,7 +264,7 @@ public class DbHelper {
 		sqlStringBuffer.deleteCharAt(sqlStringBuffer.length() - 1);
 		 
 		
-		System.out.println("sqlString =>" + sqlStringBuffer.toString());
+		logger.info("sqlString =>" + sqlStringBuffer.toString());
 		return sqlStringBuffer.toString();
 	
 	}
@@ -288,7 +292,7 @@ public class DbHelper {
 //		sqlStringBuffer.deleteCharAt(sqlStringBuffer.length() - 1);
 //		 
 //		
-//		System.out.println("sqlString =>" + sqlStringBuffer.toString());
+//		logger.info("sqlString =>" + sqlStringBuffer.toString());
 //		return sqlStringBuffer.toString();
 //	
 //	}
@@ -318,7 +322,7 @@ public class DbHelper {
 	//	sqlStringBuffer.deleteCharAt(sqlStringBuffer.length() - 1);
 		 
 		
-		System.out.println("sqlString =>" + sqlStringBuffer.toString());
+		logger.info("sqlString =>" + sqlStringBuffer.toString());
 		return sqlStringBuffer.toString();
 	
 	}
@@ -380,7 +384,7 @@ public class DbHelper {
 		String sqlString = DbHelper.getSqlClauseFromArr(userJSONArr, "objectId");
 
 		sqlString = "DELETE FROM Employee WHERE objectId in " + sqlString;
-		System.out.println("sqlString ->" + sqlString);
+		logger.info("sqlString ->" + sqlString);
 		Connection conn = DbBean.getConn();
 		Statement stmt = DbBean.getStatement(conn);
 		
@@ -433,7 +437,7 @@ public class DbHelper {
 		Connection conn = DbBean.getConn();
 		Statement stmt = DbBean.getStatement(conn);
 		String sql = "UPDATE " + tableName + " SET " + updateClause + " WHERE " + filterClause;
-		System.out.println("in update ->" + sql);
+		logger.info("in update ->" + sql);
 		try {
 			int rs = stmt.executeUpdate(sql);
 			return rs == 0;
@@ -461,7 +465,7 @@ public class DbHelper {
         }
         // remove last AND
         sqlClause.delete(sqlClause.length() - 4, sqlClause.length() - 1);
-    //    System.out.println("sqlClause ->" + sqlClause.toString());
+    //    logger.info("sqlClause ->" + sqlClause.toString());
         return sqlClause.toString();
 	}
 	
@@ -492,7 +496,7 @@ public class DbHelper {
 		
 		String updateClause = DbHelper.getSqlClauseFromMap(updateMap);
 		String sqlString = "UPDATE " + tableName + " SET " + updateClause + " WHERE " + filterColumn + " IN ('" + StringUtils.join(values, "','") + "')";
-		System.out.println("in updateTableAttributeByArray sqlString ->" + sqlString);
+		logger.info("in updateTableAttributeByArray sqlString ->" + sqlString);
 		Connection conn = DbBean.getConn();
 		Statement stmt = DbBean.getStatement(conn);
 		try {
@@ -527,7 +531,7 @@ public class DbHelper {
 		}
 		sqlStringBuffer.deleteCharAt(sqlStringBuffer.length() - 1);
 		 
-		System.out.println("in createSqlStrFromTimeEntry sqlString =>" + sqlStringBuffer.toString());
+		logger.info("in createSqlStrFromTimeEntry sqlString =>" + sqlStringBuffer.toString());
 		return sqlStringBuffer.toString();
 	
 	}
@@ -546,7 +550,7 @@ public class DbHelper {
 		values.add(objectId);
 		
 		UserDaoList userDaoList = getRowsFromDb( tableName, columns, values);
-		System.out.println("getUserInfo userDaoList ->" + userDaoList);
+		logger.info("getUserInfo userDaoList ->" + userDaoList);
 		UserDao userDao = userDaoList.getSingleDatabaseObject(0);
 		
 		return userDao;

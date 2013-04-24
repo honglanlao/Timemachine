@@ -9,17 +9,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.microsoft.windowsazure.activedirectory.sample.timemachine.helper.DbBean;
 import com.microsoft.windowsazure.activedirectory.sample.timemachine.helper.DbHelper;
+import com.microsoft.windowsazure.activedirectory.sample.timemachine.helper.HelloSQLAzure;
 
 /**
  * @author Azure Active Directory Contributor
  *
  */
 public class TimeEntryService {
+	
+	private static Logger logger  = Logger.getLogger(TimeEntryService.class);
 	
 	public static final String[] TimeOff_Type_Arr = new String[]{"Vacation", "Sick Leave", "Floating Holiday", "Jury Duty", "Time Off Without Pay"};
 
@@ -29,7 +33,7 @@ public class TimeEntryService {
 		Statement stmt = DbBean.getStatement(conn);
 		String sql = "SELECT RTRIM(LTRIM(STR(MONTH(Date))))+'-'+  RTRIM(LTRIM(STR(DAY(Date))))+'-'+ RTRIM(LTRIM(STR(YEAR(Date)))) AS Date, ApprovalStatus, TimeOff_Type, Hours"				
 					+ " FROM TimeEntries WHERE Date BETWEEN '" + startDate + "' AND '" + endDate + "' AND EmployeeID='" + userObjectId + "';";
-		System.out.println("in getUserTimeEntryByPeriod sql ->" + sql);
+		logger.info("in getUserTimeEntryByPeriod sql ->" + sql);
 		
 		ResultSet rs = DbBean.getResultSet(stmt, sql);
 		JSONArray timeEntriesArr = new JSONArray();
@@ -53,7 +57,7 @@ public class TimeEntryService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}		
-		System.out.println("timeEntriesArr ->" + timeEntriesArr);
+		logger.info("timeEntriesArr ->" + timeEntriesArr);
 		/*JSONObject weekly_dates_obj = new JSONObject(weekly_dates_str);
 		weekly_dates_obj.remove("picked");
 		for(int i = 0; i < TimeOff_Type_Arr.length; i ++){
@@ -103,7 +107,7 @@ public class TimeEntryService {
 				+ " AND TimeEntries.ApprovalStatus=ApprovalStates.StateID" 
 				+ " AND ApprovalStates.StateName='" + stateName + "';";
 		
-		System.out.println("in getTimeOffRequestsByUserObjectId sql ->" + sql);
+		logger.info("in getTimeOffRequestsByUserObjectId sql ->" + sql);
 		Connection conn = DbBean.getConn();
 		Statement stmt = DbBean.getStatement(conn);
 		ResultSet rs = DbBean.getResultSet(stmt, sql);
@@ -152,7 +156,7 @@ public class TimeEntryService {
 				        + "' AND Date=CONVERT(DATETIMEOFFSET,'" + date + "')"
 				        + " AND TimeOff_Type='" + timeoff_type + "';";
 		
-		System.out.println("in processDRRequests sqlStr ->" + sqlStr);
+		logger.info("in processDRRequests sqlStr ->" + sqlStr);
 		Connection conn = DbBean.getConn();
 		Statement stmt = DbBean.getStatement(conn);
 		try {

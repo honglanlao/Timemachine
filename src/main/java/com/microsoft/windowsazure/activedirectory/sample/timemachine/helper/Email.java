@@ -10,6 +10,10 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.log4j.Logger;
+
+import com.microsoft.windowsazure.activedirectory.sample.timemachine.controllers.UserServlet;
+
 public class Email {
 
 	  // Recipient's email ID needs to be mentioned.
@@ -23,7 +27,9 @@ public class Email {
 	
 	  // Get system properties
 	  private Properties props = System.getProperties();
-	
+	  
+	  private static Logger logger  = Logger.getLogger(Email.class);
+
 	  // Setup mail server
 	  public Email(){
 		  props.put("mail.smtp.host", "smtp.gmail.com");
@@ -67,7 +73,7 @@ public class Email {
 
     		  // Send message
     		  Transport.send(message);
-    		  System.out.println("Sent message successfully....");
+    		  logger.info("Sent message successfully....");
 	      }catch (MessagingException mex) {
 	         mex.printStackTrace();
 	      }

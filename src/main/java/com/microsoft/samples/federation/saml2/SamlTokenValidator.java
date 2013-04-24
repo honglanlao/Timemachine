@@ -48,6 +48,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
+import org.apache.log4j.Logger;
 import org.joda.time.Duration;
 import org.joda.time.Instant;
 import org.opensaml.Configuration;
@@ -83,11 +84,15 @@ import com.microsoft.samples.federation.saml2.SamlTokenValidator;
 
 @SuppressWarnings("deprecation")
 public class SamlTokenValidator {
+	
 	public static final int MAX_CLOCK_SKEW_IN_MINUTES = 3;
 	private List<String> trustedIssuers;
 	private List<URI> audienceUris;
 	private boolean validateExpiration = true;
 	private String thumbprint;
+	
+	private static Logger logger  = Logger.getLogger(SAMLConsumer.class);
+
 
 	public SamlTokenValidator() throws ConfigurationException {
 		this(new ArrayList<String>(), new ArrayList<URI>());
@@ -335,7 +340,7 @@ public class SamlTokenValidator {
 
 		String thumbprintFromToken = SamlTokenValidator  
 				.getThumbPrintFromCert(pubKey);
-		System.out.println("thumbprint from token ->" + thumbprintFromToken);
+		logger.info("thumbprint from token ->" + thumbprintFromToken);
 		return thumbprintFromToken.equalsIgnoreCase(thumbprint);
 	}
 

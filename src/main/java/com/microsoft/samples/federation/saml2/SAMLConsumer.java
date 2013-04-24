@@ -14,6 +14,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.FactoryConfigurationError;
 import org.apache.commons.httpclient.HttpClient;
+import org.apache.log4j.Logger;
 
 import org.joda.time.DateTime;
 import org.opensaml.Configuration;
@@ -67,6 +68,8 @@ public class SAMLConsumer {
      * object and processing the saml2 Response object which is sent by the
      * identity provider.
      */
+	private static Logger logger  = Logger.getLogger(SAMLConsumer.class);
+
     // The url of the identity provider
     String redirectionUrl = null;
     // The url of the service provider which send the AuthnRequest object
@@ -74,7 +77,6 @@ public class SAMLConsumer {
     // Identity provider sends the Response object to this url
     String consumerUrl = null;
     // ID of the AuthRequest object
-//    String randomId = Integer.toHexString(new Double(Math.random()*100).intValue());
     String randomId = "id_" + UUID.randomUUID().toString();
     // The redirectUrl with the message
     String compUrl = null;
@@ -179,7 +181,7 @@ public class SAMLConsumer {
         XMLHelper.writeNode(authDOM, rspWrt);
         requestMessage = rspWrt.toString();
         
-        System.out.println("before encoding ->" + requestMessage);
+        logger.info("before encoding ->" + requestMessage);
 
         // DEFLATE compression of the message, byteArrayOutputStream will holds
         // the compressed bytes

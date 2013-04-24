@@ -15,6 +15,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.log4j.Logger;
 import org.opensaml.Configuration;
 import org.opensaml.saml2.core.Response;
 import org.opensaml.xml.ConfigurationException;
@@ -33,6 +34,8 @@ import org.xml.sax.SAXException;
  * 
  */
 public class SAMLUtil {
+	
+	private static Logger logger  = Logger.getLogger(SAMLUtil.class);
 
 	public static String getRedirectUrl(String samlTokenStr){
 
@@ -46,7 +49,7 @@ public class SAMLUtil {
 		            NodeList list = doc.getElementsByTagName("samlp:Response");
 		            Element node = (Element)list.item(0);
 		            String redirectUrl = (String) node.getAttribute("Destination");
-		            System.out.println("redirectUrl ->" + redirectUrl);
+		            logger.info("redirectUrl ->" + redirectUrl);
 		            return redirectUrl;
 			} catch (ParserConfigurationException e) {
 				// TODO Auto-generated catch block

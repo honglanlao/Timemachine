@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
+import com.microsoft.samples.federation.saml2.SAMLUtil;
+
 /**
  * @author Azure Active Directory Contributor
  *
@@ -22,6 +26,7 @@ public class AuthServlet extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = -6937590576618247591L;
+	private static Logger logger  = Logger.getLogger(AuthServlet.class);
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		
@@ -37,10 +42,10 @@ public class AuthServlet extends HttpServlet {
 		        Cookie[] cookies = request.getCookies();
 		        if (cookies != null){
 		            for (int i = 0; i < cookies.length; i++) {
-		            	System.out.println("cookie name ->" + cookies[i].getName());
-		            	System.out.println("cookie value ->" + cookies[i].getValue());
-		            	System.out.println("cookie path ->" + cookies[i].getPath());
-		            	System.out.println("cookie domain ->" + cookies[i].getDomain());
+		            	logger.info("cookie name ->" + cookies[i].getName());
+		            	logger.info("cookie value ->" + cookies[i].getValue());
+		            	logger.info("cookie path ->" + cookies[i].getPath());
+		            	logger.info("cookie domain ->" + cookies[i].getDomain());
 
 		                cookies[i].setValue("");
 		                cookies[i].setPath("/");

@@ -8,10 +8,15 @@ package com.microsoft.windowsazure.activedirectory.sample.timemachine.helper;
  *
  */
 import java.sql.*;
+
+import org.apache.log4j.Logger;
+
 import com.microsoft.sqlserver.jdbc.*;
 
 public class HelloSQLAzure {
 
+	private static Logger logger  = Logger.getLogger(HelloSQLAzure.class);
+	
     public static void main(String[] args) 
     {
 
@@ -78,7 +83,7 @@ public class HelloSQLAzure {
             
             String sqlString8 = "SELECT RTRIM(LTRIM(STR(MONTH(Date))))+'/'+  RTRIM(LTRIM(STR(DAY(Date))))+'/'+ RTRIM(LTRIM(STR(YEAR(Date)))), ApprovalStatus, TimeOff_Type"				
 					+ " FROM TimeEntries AS te WHERE Date BETWEEN '3/17/2013' AND '3/22/2013' AND EmployeeID='7f5015a4-e8a0-4b43-a7ed-43ddf911e03e';";
-            System.out.println("sqlString ->" + sqlString8);
+            logger.info("sqlString ->" + sqlString8);
             // Use the connection to create the SQL statement.
             statement = connection.createStatement();
 
@@ -87,21 +92,21 @@ public class HelloSQLAzure {
          //   int rs = statement.executeUpdate(sqlString8);
          //   while(rs.next())
             // Provide a message when processing is complete.
-         //   System.out.println("rs rows ->" + rs.next());
-            System.out.println("rs ->" + rs);
-            System.out.println("Processing complete.");
+         //   logger.info("rs rows ->" + rs.next());
+            logger.info("rs ->" + rs);
+            logger.info("Processing complete.");
 
         }
         // Exception handling
         catch (ClassNotFoundException cnfe)  
         {
 
-            System.out.println("ClassNotFoundException " +
+            logger.info("ClassNotFoundException " +
                                cnfe.getMessage());
         }
         catch (Exception e)
         {
-            System.out.println("Exception " + e.getMessage());
+            logger.info("Exception " + e.getMessage());
             e.printStackTrace();
         }
         finally

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -37,10 +38,10 @@ import com.microsoft.windowsazure.activedirectory.sample.timemachine.services.Ti
  */
 public class UserServlet extends HttpServlet {
 	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -266462121586629255L;
+	
+	private static Logger logger  = Logger.getLogger(UserServlet.class);
 
 	/**
 	 * This method initializes all the application specific parameters from the
@@ -67,7 +68,7 @@ public class UserServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		String action = request.getParameter("action");
-		System.out.println("action ->" + action);
+		logger.info("action ->" + action);
 		String tenantid = request.getParameter("tenantid");
 		String upn = request.getParameter("upn");
 	    String objectId = request.getParameter("objectId");
@@ -93,10 +94,10 @@ public class UserServlet extends HttpServlet {
 				
 				boolean isHRAdmin = new Boolean(DbHelper.getColumnAttributeByParams("Employee", "ObjectId", objectId, "IsHrAdmin"));			
 				hrAdminData.put("isHRAdmin", isHRAdmin);
-			//	System.out.println("isHRAdmin ->" + isHRAdmin);
+			//	logger.info("isHRAdmin ->" + isHRAdmin);
 				//check isITAdmin in active directory
 				boolean isITAdmin = CommonService.isMemberOf(objectId, "Company Administrator");
-				System.out.println("isITAdmin ->" + isITAdmin);
+				logger.info("isITAdmin ->" + isITAdmin);
 				hrAdminData.put("isITAdmin", isITAdmin);
 				
 				// if HRadmin or ITadmin, do differential query, update Employee table
@@ -106,18 +107,18 @@ public class UserServlet extends HttpServlet {
 				if(isHRAdmin || isITAdmin){
 					String deltaLink = DbHelper.getColumnAttributeByParams("TenantsProperties", "ObjectId", tenantid, "DeltaLink");
 					if(deltaLink == null || deltaLink.length() == 0) deltaLink = "";
-					System.out.println("old deltaLink ->" + deltaLink);
+					logger.info("old deltaLink ->" + deltaLink);
 					JSONObject deltaObj = CommonService.getDifferentialDirectoryObjectList(UserList.class, User.class, deltaLink);
-					System.out.println("deltaObj ->" + deltaObj);
+					logger.info("deltaObj ->" + deltaObj);
 					String new_deltaLink = JSONHelper.fetchDeltaLink(deltaObj);
-					System.out.println("new_deltaLink ->" + new_deltaLink);
+					logger.info("new_deltaLink ->" + new_deltaLink);
 					JSONArray directoryObjectJSONArr = JSONHelper.fetchDirectoryObjectJSONArray(deltaObj);
 					addJSONArr = new JSONArray();
 					minusJSONArr = new JSONArray();
 
 					for(int i = 0 ; i < directoryObjectJSONArr.length(); i ++){
 						JSONObject thisObj = directoryObjectJSONArr.optJSONObject(i);
-						System.out.println("thisObj ->" + thisObj);
+						logger.info("thisObj ->" + thisObj);
 						if(thisObj.optString("objectType").equals("User")){
 
 							if(thisObj.optBoolean("aad.isDeleted")){ //
@@ -132,9 +133,9 @@ public class UserServlet extends HttpServlet {
 							}
 						}
 					}
-					System.out.println("updateJSONArr ->" + updateJSONArr);
-					System.out.println("addJSONArr ->" + addJSONArr);
-					System.out.println("minusJSONArr ->" + minusJSONArr);
+					logger.info("updateJSONArr ->" + updateJSONArr);
+					logger.info("addJSONArr ->" + addJSONArr);
+					logger.info("minusJSONArr ->" + minusJSONArr);
 					boolean status = true;
 					if(updateJSONArr.length() > 0){
 						status = DbHelper.insertRows(updateJSONArr);
@@ -145,7 +146,7 @@ public class UserServlet extends HttpServlet {
 					if(minusJSONArr.length() > 0){
 						status &= DbHelper.deleteRows(minusJSONArr);
 					}
-					System.out.println("status ->" + status);
+					logger.info("status ->" + status);
 					if(status){
 						// insert new deltaLink;
 						Map<String, String> updateMap = new HashMap<String, String>();
@@ -170,7 +171,7 @@ public class UserServlet extends HttpServlet {
 				
 				JSONObject directreports = new JSONObject();
 				UserList directReportUserList = (UserList)UserService.getDirectReportsByObjectId(objectId);
-				System.out.println("userList ->" + directReportUserList);
+				logger.info("userList ->" + directReportUserList);
 				if(directReportUserList.getListSize() == 0){
 					directreports.put("hasDirectReports", false);
 				}else{
@@ -224,11 +225,11 @@ public class UserServlet extends HttpServlet {
 					String weekly_dates_str = request.getParameter("weekly_dates_str");
 					String startDate = request.getParameter("startDate");
 					String endDate = request.getParameter("endDate");
-					System.out.println("startDate ->" + startDate);
-					System.out.println("endDate ->" + endDate);
+					logger.info("startDate ->" + startDate);
+					logger.info("endDate ->" + endDate);
 	
 					JSONArray timeEntryArr = TimeEntryService.getUserTimeEntryByPeriod(objectId, weekly_dates_str, startDate, endDate);
-					System.out.println("timeEntryArr->" + timeEntryArr);		
+					logger.info("timeEntryArr->" + timeEntryArr);		
 					
 					String baseline =  "[{\"cell\":[\"Vacation\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\"]},"
 								        + "{\"cell\":[\"Sick Leave\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\"]},"
@@ -298,7 +299,7 @@ public class UserServlet extends HttpServlet {
 					boolean status = TimeEntryService.logUserTimeEntry(objectId, hoursList);
 					// get manager email
 					String email = UserService.getManagerByObjectId(objectId).getMail();
-					System.out.println("email ->" + email);
+					logger.info("email ->" + email);
 					new Email().sendEmail(email);
 					
 					response.getWriter().write("{\"status\":" + status + "}");
