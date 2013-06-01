@@ -7,7 +7,7 @@
 <html>
 <head>
  <meta charset="utf-8" />
-  <title>jQuery UI Tabs - Default functionality</title>
+  <title>Time Machine login</title>
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
   <link href="localhost:8443/sample/styles/common.css" rel="stylesheet" type="text/css">
   <link href="/sample/styles/default.css" rel="stylesheet" type="text/css">
@@ -226,14 +226,14 @@ a img{
 	            <div id="tabs-1" style="height:200px">	            	
 	            	<aside>
 						<ul>
-						<!--  <li>
+						  <li>
 								<a href="<%=com.microsoft.samples.federation.wsfed.FederatedLoginManager.getFederatedLoginUrl(request.getParameter("returnUrl"))%>">
 								<%="login " + com.microsoft.samples.federation.wsfed.FederatedConfiguration.getInstance().getStsFriendlyName() + " using wsfed" %></a>		  
-							</li> -->	
-							<li>
-								<a href="<%=com.microsoft.samples.federation.saml2.FederatedLoginManager.getFederatedLoginUrl(request.getParameter("returnUrl"))%>">
-								<%="login " + com.microsoft.samples.federation.saml2.FederatedConfiguration.getInstance().getStsFriendlyName() + " using saml2"%></a>		  
-							</li>
+							</li> 	
+						<!--	<li>
+								<a href="<%=com.microsoft.samples.federation.wsfed.FederatedLoginManager.getFederatedLoginUrl(request.getParameter("returnUrl"))%>">
+								<%="login " + com.microsoft.samples.federation.wsfed.FederatedConfiguration.getInstance().getStsFriendlyName() + " using saml2"%></a>		  
+							</li>-->
 							
 						</ul>
 					</aside>

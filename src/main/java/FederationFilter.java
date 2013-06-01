@@ -14,8 +14,11 @@ import org.apache.log4j.Logger;
 import java.util.regex.*;
 
 import com.microsoft.azure.activedirectory.sampleapp.controllers.UserServlet;
-import com.microsoft.samples.federation.saml2.FederatedLoginManager;
-import com.microsoft.samples.federation.saml2.URLUTF8Encoder;
+//import com.microsoft.samples.federation.saml2.FederatedLoginManager;
+//import com.microsoft.samples.federation.saml2.URLUTF8Encoder;
+
+import com.microsoft.samples.federation.wsfed.FederatedLoginManager;
+import com.microsoft.samples.federation.wsfed.URLUTF8Encoder;
 
 public class FederationFilter implements Filter {
 	private String loginPage;

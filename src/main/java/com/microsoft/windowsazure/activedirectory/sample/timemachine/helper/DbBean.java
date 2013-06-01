@@ -12,9 +12,9 @@ import java.sql.*;
 public class DbBean {
 	
 	private static String connectionString = 
-            "jdbc:sqlserver://oppa7xbv1a.database.windows.net:1433" + ";" +  
+            "jdbc:sqlserver://evrdhdmr5h.database.windows.net:1433" + ";" +  
                     "database=timecardsample" + ";" + 
-                    "user=timecard@oppa7xbv1a" + ";" +  
+                    "user=timecard@evrdhdmr5h" + ";" +  
                     "password=P0rsche911" + ";" + "encrypt=true;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
 	
 	private static String dbDriver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";   

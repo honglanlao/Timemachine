@@ -73,12 +73,12 @@
 			<groupId>com.microsoft.samples.federation.wsfed</groupId>
 			<artifactId>waad-federation-wsfed</artifactId>
 			<version>0.0.1-SNAPSHOT</version> 
-		</dependency> 
+	  	</dependency> 
 			<dependency>
 			<groupId>com.microsoft.samples.federation.saml2</groupId>
 			<artifactId>waad-federation-saml2</artifactId>
 			<version>0.0.1-SNAPSHOT</version> 
-		</dependency> 
+		</dependency>  
 	</dependencies>
 
 	<repositories>
