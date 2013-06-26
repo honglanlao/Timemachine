@@ -16,10 +16,10 @@ import org.apache.log4j.Logger;
 //import com.microsoft.samples.federation.saml2.FederationException;
 //import com.microsoft.samples.federation.saml2.SAMLConsumer;
 
-import com.microsoft.samples.federation.wsfed.FederatedAuthenticationListener;
-import com.microsoft.samples.federation.wsfed.FederatedLoginManager;
-import com.microsoft.samples.federation.wsfed.FederatedPrincipal;
-import com.microsoft.samples.federation.wsfed.FederationException;
+import com.microsoft.windowsazure.activedirectory.sdk.wsfed.FederatedAuthenticationListener;
+import com.microsoft.windowsazure.activedirectory.sdk.wsfed.FederatedLoginManager;
+import com.microsoft.windowsazure.activedirectory.sdk.wsfed.FederatedPrincipal;
+import com.microsoft.windowsazure.activedirectory.sdk.wsfed.FederationException;
 
 public class FederationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

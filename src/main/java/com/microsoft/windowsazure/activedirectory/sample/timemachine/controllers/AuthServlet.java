@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import com.microsoft.samples.federation.saml2.SAMLUtil;
+//import com.microsoft.windowsazure.activedirectory.sdk.samlp.SAMLUtil;
 
 /**
  * @author Azure Active Directory Contributor

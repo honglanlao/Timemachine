@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>TimecardSampleApp</display-name>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	<filter>
+		<filter-name>FederationFilter</filter-name>
+		<filter-class>FederationFilter</filter-class>
+		<init-param>
+			<param-name>login-page-url</param-name>
+			<param-value>/sample/login.jsp</param-value>
+		</init-param>
+		<init-param>
+			<param-name>allowed-regex</param-name>
+			<param-value>(\/sample\/login.jsp|\/sample\/wsfed-saml|\/sample\/oauth)</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>FederationFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>FederationServlet</display-name>
+		<servlet-name>FederationServlet</servlet-name>
+		<servlet-class>FederationServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FederationServlet</servlet-name>
+		<url-pattern>/wsfed-saml</url-pattern>
+	</servlet-mapping>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>SSL Forwarding</web-resource-name>
+			<url-pattern>/*</url-pattern>
+			<http-method>POST</http-method>
+			<http-method>GET</http-method>
+		</web-resource-collection>
+		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+	
+	<context-param>
+		<param-name>ApiVersion</param-name>
+		<param-value>1.0</param-value>
+	</context-param>
+	<context-param>
+		<param-name>TenantContextId</param-name>
+		<param-value>2f8b426e-e53f-4353-b255-e70ca20bbde0</param-value>
+	</context-param>
+	<context-param>
+		<param-name>TenantDomainName</param-name>
+		<param-value>timecardsample.ccsctp.net</param-value>
+	</context-param>
+	<context-param>
+		<param-name>ProtectedResourcePrincipalId</param-name>
+		<param-value>00000002-0000-0000-c000-000000000000</param-value>
+	</context-param>
+	<context-param>
+		<param-name>ProtectedResourceHostName</param-name>
+		<param-value>graph.ppe.windows.net</param-value>
+	</context-param>
+	<context-param>
+		<param-name>RestServiceHost</param-name>
+		<param-value>graph.ppe.windows.net</param-value>
+	</context-param>
+	<context-param>
+		<param-name>AppPrincipalId</param-name>
+		<param-value>6015c885-f649-46e1-a06e-2383d1dc91b5</param-value>	
+	</context-param>
+	<context-param>
+		<param-name>StsUrl</param-name>
+		<param-value>https://accounts.accesscontrol.windows-ppe.net/tokens/OAuth/2</param-value>
+	</context-param>
+	<context-param>
+		<param-name>SymmetricKey</param-name>
+		<param-value>V1LJ5KdDe6jANAKla7mgjVxIHW8Nacy0/JM1A2IQ368=</param-value>
+	</context-param>
+	<context-param>
+		<param-name>AcsPrincipalId</param-name>
+		<param-value>00000001-0001-0000-c000-000000000000</param-value>
+	</context-param>
+	
+	<servlet>
+		<servlet-name>User</servlet-name>
+		<servlet-class>com.microsoft.azure.activedirectory.timecardsample.controllers.UserServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>User</servlet-name>
+		<url-pattern>/User</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Auth</servlet-name>
+		<servlet-class>com.microsoft.azure.activedirectory.timecardsample.controllers.AuthServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Auth</servlet-name>
+		<url-pattern>/Auth</url-pattern>
+	</servlet-mapping>
+
+</web-app>

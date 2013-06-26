@@ -1,0 +1,73 @@
+.headbar {
+	background:none; 
+	background-position: center;
+	width:100%;
+}
+
+.headbar h1 {
+	padding: 0 5px; 
+	font-family: serif;
+	font-size: 26px;
+	font-weight: bold; 
+	color: #424242;
+	
+}
+a:link{
+	color:#356AA6;
+	text-decoration: none;
+	font-size:15px;
+	font-weight:normal;
+	padding-top:5px;
+}
+
+a:visited{
+	color:grey;
+	text-decoration: none;
+	font-size:15px;
+	font-weight:normal;
+	padding-top:5px;
+}
+#main a:hover {
+	text-decoration: underline;	
+}
+#main1 a:hover {
+	text-decoration: underline;	
+}
+#main2 a:hover {
+	text-decoration: underline;	
+}
+.faq-heading{
+	color: #356AA6;
+	font-size: 18px;
+	font-weight: bold;
+	padding-right:20px;
+}
+
+.answer-div{
+	margin-top:10px;
+	font-size:15px;
+}
+.answer-div a:link{
+	color:#356AA6;
+	text-decoration: none;
+	font-size:15px;
+	font-weight:normal;
+	
+}
+.answer-div a:visited{
+	text-decoration: none;
+	color:#356AA6;
+	font-size:15px;
+	font-weight:normal;
+}
+.answer-div a:hover {
+	color:#356AA6;
+}
+tr{
+	background-color:#FDFAF1;
+	border-bottom: 1px solid #E2DCC8;
+}
+
+table{
+border-collapse: collapse;
+}

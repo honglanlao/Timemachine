@@ -19,18 +19,20 @@ import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.microsoft.azure.activedirectory.sampleapp.exceptions.SampleAppException;
-import com.microsoft.azure.activedirectory.sampleapp.helper.JSONHelper;
-import com.microsoft.azure.activedirectory.sampleapp.helper.ServletHelper;
-import com.microsoft.azure.activedirectory.sampleapp.models.User;
-import com.microsoft.azure.activedirectory.sampleapp.models.UserList;
-import com.microsoft.azure.activedirectory.sampleapp.services.CommonService;
-import com.microsoft.azure.activedirectory.sampleapp.services.UserService;
+import com.microsoft.windowsazure.activedirectory.sample.timemachine.config.Config;
 import com.microsoft.windowsazure.activedirectory.sample.timemachine.dao.UserDao;
 import com.microsoft.windowsazure.activedirectory.sample.timemachine.dao.UserDaoList;
 import com.microsoft.windowsazure.activedirectory.sample.timemachine.helper.DbHelper;
 import com.microsoft.windowsazure.activedirectory.sample.timemachine.helper.Email;
 import com.microsoft.windowsazure.activedirectory.sample.timemachine.services.TimeEntryService;
+import com.microsoft.windowsazure.activedirectory.sdk.graph.config.TenantConfiguration;
+import com.microsoft.windowsazure.activedirectory.sdk.graph.exceptions.SdkException;
+import com.microsoft.windowsazure.activedirectory.sdk.graph.helper.JSONHelper;
+import com.microsoft.windowsazure.activedirectory.sdk.graph.models.User;
+import com.microsoft.windowsazure.activedirectory.sdk.graph.models.UserList;
+import com.microsoft.windowsazure.activedirectory.sdk.graph.services.CommonService;
+import com.microsoft.windowsazure.activedirectory.sdk.graph.services.UserService;
+
 
 /**
  * @author Azure Active Directory Contributor
@@ -40,21 +42,24 @@ public class UserServlet extends HttpServlet {
 	
 
 	private static final long serialVersionUID = -266462121586629255L;
+	private static final TenantConfiguration tenant = TenantConfiguration.getInstance(Config.tenantPropertiesPath);
+	private CommonService commonService = new CommonService(tenant);
+	private UserService userService = new UserService(tenant);
 	
 	private static Logger logger  = Logger.getLogger(UserServlet.class);
 
 	/**
 	 * This method initializes all the application specific parameters from the
 	 * xml configuration file to the appropriate variables in the
-	 * {@link com.microsoft.azure.activedirectory.sampleapp.services.SampleConfig SampleConfig} class. This
+	 * {@link com.microsoft.windowsazure.activedirectory.sdk.graph.services.SdkConfig SdkConfig} class. This
 	 * method also generates an access token and initializes the acessToken
-	 * parameter in the SampleConfig class.
+	 * parameter in the SdkConfig class.
 	 *
 	 */	
 	@Override
 	public void init() throws ServletException {
 
-		ServletHelper.loadConfig(this.getServletConfig());
+	//	ServletHelper.loadConfig(this.getServletConfig());
 	}
 	
 	
@@ -76,8 +81,8 @@ public class UserServlet extends HttpServlet {
 		switch(action){
 		
 			case "loadUserBasicInfo":
-				User user = (User)CommonService.getSingleDirectoryObject(User.class, objectId);	
-				String directManager = UserService.getManagerByObjectId(objectId).getDisplayName();
+				User user = (User)commonService.getSingleDirectoryObject(User.class, objectId);	
+				String directManager = userService.getManagerByObjectId(objectId).getDisplayName();
 				
 				user.setManagerDisplayname(directManager);
 				response.getWriter().write(user.toString());
@@ -96,7 +101,7 @@ public class UserServlet extends HttpServlet {
 				hrAdminData.put("isHRAdmin", isHRAdmin);
 			//	logger.info("isHRAdmin ->" + isHRAdmin);
 				//check isITAdmin in active directory
-				boolean isITAdmin = CommonService.isMemberOf(objectId, "Company Administrator");
+				boolean isITAdmin = commonService.isMemberOf(objectId, "Company Administrator");
 				logger.info("isITAdmin ->" + isITAdmin);
 				hrAdminData.put("isITAdmin", isITAdmin);
 				
@@ -108,7 +113,7 @@ public class UserServlet extends HttpServlet {
 					String deltaLink = DbHelper.getColumnAttributeByParams("TenantsProperties", "ObjectId", tenantid, "DeltaLink");
 					if(deltaLink == null || deltaLink.length() == 0) deltaLink = "";
 					logger.info("old deltaLink ->" + deltaLink);
-					JSONObject deltaObj = CommonService.getDifferentialDirectoryObjectList(UserList.class, User.class, deltaLink);
+					JSONObject deltaObj = commonService.getDifferentialDirectoryObjectList(UserList.class, User.class, deltaLink);
 					logger.info("deltaObj ->" + deltaObj);
 					String new_deltaLink = JSONHelper.fetchDeltaLink(deltaObj);
 					logger.info("new_deltaLink ->" + new_deltaLink);
@@ -170,7 +175,7 @@ public class UserServlet extends HttpServlet {
 			case "loadDirectreports":
 				
 				JSONObject directreports = new JSONObject();
-				UserList directReportUserList = (UserList)UserService.getDirectReportsByObjectId(objectId);
+				UserList directReportUserList = (UserList)userService.getDirectReportsByObjectId(objectId);
 				logger.info("userList ->" + directReportUserList);
 				if(directReportUserList.getListSize() == 0){
 					directreports.put("hasDirectReports", false);
@@ -203,7 +208,7 @@ public class UserServlet extends HttpServlet {
 				break;
 		}
 		
-		}catch (SampleAppException e) {
+		}catch (SdkException e) {
 			e.printStackTrace();
 		}
 		
@@ -221,7 +226,7 @@ public class UserServlet extends HttpServlet {
 			switch(action){
 			
 				case "loadTimeEntry":
-					objectId = UserService.getObjectIdByUpn(upn);
+					objectId = userService.getObjectIdByUpn(upn);
 					String weekly_dates_str = request.getParameter("weekly_dates_str");
 					String startDate = request.getParameter("startDate");
 					String endDate = request.getParameter("endDate");
@@ -298,7 +303,7 @@ public class UserServlet extends HttpServlet {
 					
 					boolean status = TimeEntryService.logUserTimeEntry(objectId, hoursList);
 					// get manager email
-					String email = UserService.getManagerByObjectId(objectId).getMail();
+					String email = userService.getManagerByObjectId(objectId).getMail();
 					logger.info("email ->" + email);
 					new Email().sendEmail(email);
 					
@@ -308,7 +313,7 @@ public class UserServlet extends HttpServlet {
 				default:
 					break;
 			}
-		}catch (SampleAppException e) {
+		}catch (SdkException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {

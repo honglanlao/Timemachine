@@ -18,11 +18,11 @@ import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.microsoft.azure.activedirectory.sampleapp.models.User;
-import com.microsoft.azure.activedirectory.sampleapp.models.UserList;
 import com.microsoft.windowsazure.activedirectory.sample.timemachine.controllers.AuthServlet;
 import com.microsoft.windowsazure.activedirectory.sample.timemachine.dao.UserDao;
 import com.microsoft.windowsazure.activedirectory.sample.timemachine.dao.UserDaoList;
+import com.microsoft.windowsazure.activedirectory.sdk.graph.models.User;
+import com.microsoft.windowsazure.activedirectory.sdk.graph.models.UserList;
 
 /**
  * @author Azure Active Directory Contributor

@@ -6,7 +6,10 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<description>sample</description>
-
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -22,13 +25,6 @@
 			<artifactId>joda-time</artifactId>
 			<version>1.6</version>
 		</dependency>
-
-		<dependency>
-			<groupId>org.opensaml</groupId>
-			<artifactId>opensaml</artifactId>
-			<version>2.5.1-1</version>
-		</dependency>
-
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -65,20 +61,20 @@
 			<version>1.4</version>
 		</dependency>
 		<dependency>
-			<groupId>JavaSampleApp</groupId>
-			<artifactId>JavaSampleApp</artifactId>
+			<groupId>com.microsoft.windowsazure.activedirectory.sdk.graph</groupId>
+			<artifactId>WindowsAzure-ActiveDirectory-SDK-Graph</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-	  	<dependency>
-			<groupId>com.microsoft.samples.federation.wsfed</groupId>
-			<artifactId>waad-federation-wsfed</artifactId>
+		<dependency>
+			<groupId>com.microsoft.windowsazure.activedirectory.sdk.wsfed</groupId>
+			<artifactId>WindowsAzure-ActiveDirectory-SDK-Wsfed</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+  <!--  	<dependency>
+			<groupId>com.microsoft.windowsazure.activedirectory.sdk.samlp</groupId>
+			<artifactId>WindowsAzure-ActiveDirectory-SDK-Samlp</artifactId>
 			<version>0.0.1-SNAPSHOT</version> 
-	  	</dependency> 
-			<dependency>
-			<groupId>com.microsoft.samples.federation.saml2</groupId>
-			<artifactId>waad-federation-saml2</artifactId>
-			<version>0.0.1-SNAPSHOT</version> 
-		</dependency>  
+		</dependency>  -->	
 	</dependencies>
 
 	<repositories>
@@ -90,7 +86,7 @@
 	<build>
 		<finalName>sample</finalName>
 		<plugins>
-		
+
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.3</version>
@@ -98,7 +94,7 @@
 					<warSourceDirectory>${project.build.directory}/../WebRoot</warSourceDirectory>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

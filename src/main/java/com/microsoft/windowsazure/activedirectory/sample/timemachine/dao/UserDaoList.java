@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.json.JSONArray;
 
-import com.microsoft.azure.activedirectory.sampleapp.exceptions.SampleAppException;
-import com.microsoft.azure.activedirectory.sampleapp.helper.JSONHelper;
+import com.microsoft.windowsazure.activedirectory.sdk.graph.exceptions.SdkException;
+import com.microsoft.windowsazure.activedirectory.sdk.graph.helper.JSONHelper;
 
 /**
  * The class UserList holds the data of a page of users. It also contains information whether
@@ -24,13 +24,13 @@ public class UserDaoList extends DatabaseObjectList<UserDao> {
 		userDaoList = new ArrayList<UserDao>();
 	}
 	
-	public UserDaoList(JSONArray array) throws SampleAppException{
+	public UserDaoList(JSONArray array) throws SdkException{
 		userDaoList = new ArrayList<UserDao>();
 		for(int i = 0; i < array.length(); i++){
 			UserDao user = new UserDao();
 			try {
 				JSONHelper.convertJSONObjectToDirectoryObject(array.optJSONObject(i), user);
-			} catch (SampleAppException e) {
+			} catch (SdkException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

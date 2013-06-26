@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 import org.json.JSONArray;
 
-import com.microsoft.azure.activedirectory.sampleapp.exceptions.SampleAppException;
-import com.microsoft.azure.activedirectory.sampleapp.helper.JSONHelper;
+import com.microsoft.windowsazure.activedirectory.sdk.graph.exceptions.SdkException;
+import com.microsoft.windowsazure.activedirectory.sdk.graph.helper.JSONHelper;
 
 /**
  * @author Azure Active Directory Contributor
@@ -34,7 +34,7 @@ public class DatabaseObjectList<S extends DatabaseObject> {
 			S directoryObject = null;
 			try {
 				JSONHelper.convertJSONObjectToDirectoryObject(array.optJSONObject(i), directoryObject);
-			} catch (SampleAppException e) {
+			} catch (SdkException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

@@ -1,0 +1,579 @@
+/* 
+ * Common styles shared across dashboard 	
+ */
+ 
+body {
+	font-family:arial,helvetica,clean,sans-serif;
+	font-size:13px;
+	font-size-adjust:none;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.231;
+}
+
+img {
+	border: none;
+	vertical-align: middle;	
+}
+
+table {
+	border: 0;
+}
+
+.non-link {
+	text-decoration: none;
+	cursor: text;
+}
+
+.link, .yuimenubaritemlabel.link, .yuimenubaritemlabel-selected.link, .yuimenubaritemlabel.link:visited,
+.hlink, .yuimenubaritemlabel.hlink, .yuimenubaritemlabel-selected.hlink {
+	text-decoration: underline;
+	cursor: pointer;	
+}
+
+.hlink, .yuimenubaritemlabel.hlink, .yuimenubaritemlabel-selected.hlink, .yuimenubaritemlabel.hlink:visited {
+	color: #0000EE;	
+}
+
+#homeContainer {
+	width: 100%;	
+}
+
+#loadingContainer {
+	background-color: #E0E0E0;
+	width: 100%;
+	text-align: center;
+	padding: 15px 0px;
+	border: 1px solid #7F7F7F;
+	color: #4F8ACB;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+#home {
+	 margin-top: 0px;
+	 padding: 3px;
+	 padding-top:0px;	
+}
+
+#baseContainer {
+	background: #FAF6F2 none repeat scroll 0 0;
+	padding: 10px 0px;
+}
+
+.universal-header{
+	background-image:url(http://l.yimg.com/a/lib/uh/15/uh_sprites_1.5-1.0.3.png);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	padding-bottom: 15px;
+	padding-left: 10px;
+	padding-top: 15px;
+}
+
+.mainheader-font {
+	font-size:23px; 
+	font-weight:bold;	
+	color:#424242;
+}
+
+.helptip {	
+}
+
+.infotip {	
+}
+
+.headtips {
+	font-size: 11px;
+	text-align: center;
+	padding: 0px 10px;
+}
+
+.thumbsdowntip {
+	float:right;
+	margin-right:20px;
+	width: 40px;
+	font-size: 11px;	
+}
+
+.thumbsdown {
+	width: 25px; 
+	height:17px; 		
+}
+
+.durationscale {
+	height: 30px; 
+	width: 90px;
+}
+
+.colorbarhelptip {
+	width: 150px; 
+	height:23px; 
+}
+
+.headbar {
+	background:none; 
+	background-position: center;
+	width:30%;
+	padding: 10px; 
+	font-family: serif;
+	font-size: 20px;
+	font-weight: bold; 
+	color: #424242;	
+}
+
+.smallnote {
+	font-size: 10px;
+}
+
+.thumbsup-div {
+	text-align:center;
+}
+
+#reportdiv {
+	width:68px; 
+	border:none;
+	background:none;
+	text-align: left;
+	font-size: 12px;
+}
+
+.border {
+	background: #DBDFEF;
+	padding:2px 0 0;
+}
+
+.border table {
+	border-collapse: collapse;
+}
+
+/***********************/
+/****** IMAGES *********/
+/***********************/
+
+.helptipimage {
+	width: 10px; 
+	height:10px; 
+}
+
+.infotipimage {
+	width: 10px; 
+	height: 10px;  
+}
+
+.tooltip-link {
+ 	cursor: default;
+ 	font-size:10px;
+}
+
+.thumbsup-img {
+	width: 16px; 
+	height:13px; 
+}
+
+.trendimage { 
+	width: 10px; 
+	height:10px; 	
+}
+
+.chartimage { 
+	width: 17px; 
+	height:15px; 	
+}
+
+.orgchartimage{
+	width: 16px; 
+	height:14px; 
+}
+
+.greenballimage {
+	width: 13px; 
+	height:13px; 	
+}
+
+.blueballimage {
+	width: 16px; 
+	height:16px;
+}
+
+.yellowballimage {
+	width: 15px; 
+	height:15px;
+}
+
+.redballimage {
+	width: 13px; 
+	height:13px;
+}
+
+.yahoo-logo-img {
+	height: 30px;
+	width: 140px;	
+}
+
+/********************/
+/****** COLORS *****/
+/********************/
+
+.red {
+	color: #e56a6a;
+}
+
+.yellow {
+	color: #FFDF00;
+}
+
+.blue {
+	color: #0080FF;
+}
+
+.green {
+	color: #04B404;
+}
+
+/*************************************/
+/****** YUI Menu + Tooltip ***********/
+/*************************************/
+
+.yui-skin-sam .yui-tt, 
+.yui-skin-sam #infotip.yui-tt {
+	width: auto;
+	font-size: 11px;	
+}
+
+.yui-skin-sam .yui-tt .bd,
+.yui-skin-sam #infotip.yui-tt .bd {
+	position: relative;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	color: #000;
+	padding: 2px 5px;
+	border-width: 1px;
+	border-style: solid;
+}
+
+.yui-skin-sam .yui-tt .bd {
+	border-color: #D4C237 #A6982B #A6982B #A6982B;
+	background-color: #F5F6CE;	
+}
+
+.yui-skin-sam #infotip.yui-tt .bd {
+	border-color: #7F7F7F;
+	background-color: #FFFFFF;	
+}
+
+.yui-skin-sam .yui-tt-shadow {
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	background-color: #fff;
+	display: none;
+}
+
+.yui-skin-sam .yui-tt-shadow-visible {
+	opacity: .2;
+	filter: alpha(opacity = 2);
+}
+
+/* secondary tabs */
+.yui-navset .yui-content .sec .yui-nav {
+	background: transparent url(../images/topbar.png) repeat-x ;
+	border-bottom: 2px solid #FE9A2E;
+}
+
+.yui-navset .yui-content .sec li,.yui-navset .yui-content .sec li a {
+	color: #fff;	
+}
+
+.yui-navset .yui-content .sec li.selected a {
+	font-weight: bold;
+	color: #fff;
+	text-decoration: underline;
+}
+
+.yui-navset .yui-content .sec li {
+	border-color: #fff;
+}  /* pipe divider */
+	
+	
+.yui-navset .yui-content .sec a {
+	text-decoration: none;
+}
+
+.yui-navset .yui-content .sec,.yui-navset .yui-content .sec li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.yui-navset .yui-content .sec li {
+	float: left;
+	display: inline;
+}
+
+.yui-navset .yui-content .sec li a:hover {
+	text-decoration: underline;
+}
+
+.yui-navset .yui-content .sec .yui-nav:after {
+	clear: both;
+	content: '.';
+	display: block;
+	height: 0;
+	visibility: hidden;
+}  /* clear non-IE */
+
+.yui-navset .yui-content .sec .yui-nav {
+	zoom: 1;
+}  /* clear IE */ 
+
+.yui-navset .yui-content .sec .yui-nav {
+	font: 12px verdana;
+	margin: 0;
+	padding: .6em 0 .4em .4em;
+}
+
+.yui-navset .yui-content .sec li {
+	border-right-style: solid;
+	border-right-width: 2px;
+	display: inline;
+	padding: 0 1em;
+}
+
+.yui-navset .yui-content .sec li.first {
+	padding-left: 0;
+	border: 0;
+}
+
+/********************************/
+/******* BREADCRUMB *************/
+/********************************/
+
+#breadcrumbsContainer {
+/*	border-bottom: 1px solid #7D7D98;
+	border-top: 1px solid #A4A4C1;
+	padding: 5px 0px;
+	height: 16px;*/
+}
+
+#breadcrumbsContainer div {
+	/*padding-left: 10px;*/
+	padding-left: 5px;
+}
+
+#tabNameContainer {
+	font-family: serif;
+	font-size: 20px;
+	font-weight: bold; 
+	color: #424242;
+}
+
+#orgNameContainer {
+	/*margin-top: 2px;*/
+  /*margin-left: 5px;*/
+	/*margin-left: 2px;*/
+	font-family: serif;
+	font-size: 16px;
+	color: #424242;
+}
+
+.toggle {
+	vertical-align:bottom;
+	color: #0000EE;
+	cursor: pointer;
+}
+
+.toggle:hover {
+	text-decoration: underline;
+}
+
+.basecontainerSubTable{
+	background: #E0E0E0; 
+	border-bottom: 1px solid #7D7D98;
+	border-top: 1px solid #A4A4C1;
+	margin-top: 2px;
+	margin-left: 5px;
+	padding: 5px 0px;	
+}
+
+.clearbackground{
+	background: transparent;
+}
+/********************************/
+/******* TREEVIEW *************/
+/********************************/
+
+#treeOrgTaxonomy {
+	padding-bottom: 5px;
+}
+
+#treeOrgTaxonomy .highlight-node {
+	font-size: 13px;
+	font-weight: bold;
+}
+
+#treeOrgTaxonomy .ygtvfocus,
+#treeOrgTaxonomy .ygtvfocus .ygtvlabel,
+#treeOrgTaxonomy .ygtvfocus .ygtvlabel:link,
+#treeOrgTaxonomy .ygtvfocus .ygtvlabel:visited,
+#treeOrgTaxonomy .ygtvfocus .ygtvlabel:hover {
+	background-color: #FFFFFF; /* #FAEBD7 */
+}
+
+#treeOrgTaxonomy .ygtvcell, #treeOrgTaxonomy .ygtvspacer { 
+	height: 10px; 
+}
+
+#treeOrgTaxonomy .ygtvspacer {
+	width: 10px;	
+}
+
+#treeOrgTaxonomy .ygtvblankdepthcell {
+	width: 0px;	
+}
+
+#treeOrgTaxonomy .ygtvlp, #treeOrgTaxonomy .ygtvlph {
+	background: transparent url(../images/expand_icon1.gif) no-repeat;
+}
+
+#treeOrgTaxonomy .ygtvlm, #treeOrgTaxonomy .ygtvlmh {
+	background: transparent url(../images/collapse_icon1.gif) no-repeat;
+}
+
+#treeOrgTaxonomy .ygtvtp, #treeOrgTaxonomy .ygtvtph {
+	background: transparent url(../images/expand_icon1.gif) no-repeat;
+}
+
+#treeOrgTaxonomy .ygtvtm, #treeOrgTaxonomy .ygtvtmh {
+	background: transparent url(../images/collapse_icon1.gif) no-repeat;
+}
+
+#treeOrgTaxonomy .ygtvlabel {
+	color: #000000;	
+}
+
+#treeOrgTaxonomy #ygtv0 {
+		
+}
+
+#treeOrgTaxonomy .ygtvchildren {
+	padding-left: 5px;
+}
+
+#treeOrgTaxonomy .ygtvitem {
+	font-size: 12px;	
+	padding-top: 5px;
+}
+
+/********************************/
+/******* YUI TABLE *************/
+/********************************/
+/*
+.yui-skin-sam .yui-dt.dashboard-dt {
+	padding-left: 5px;
+}
+
+.yui-skin-sam .yui-dt.dashboard-dt table {
+	width: 100%;
+	table-layout: fixed; 
+	word-wrap: break-word;
+	border: 1px solid #7F7F7F;	
+}
+
+.yui-skin-sam .yui-dt.dashboard-dt td  {
+	border: 1px solid #fff;
+	overflow: hidden;
+}
+*/
+
+.yui-skin-sam .yui-dt.dashboard-dt table {
+	width: 100%;
+	border: 1px solid #7F7F7F;	
+}
+
+.yui-skin-sam .yui-dt.dashboard-dt table thead .yui-dt-label {
+	white-space: normal;	
+	margin: 0px;
+}
+
+.yui-skin-sam .yui-dt.dashboard-dt td  {
+	border: 1px solid #FFFFFF;	
+}
+
+.yui-skin-sam .yui-dt.dashboard-dt tr.yui-dt-highlighted,
+.yui-skin-sam .yui-dt.dashboard-dt tr.yui-dt-highlighted td.yui-dt-asc,
+.yui-skin-sam .yui-dt.dashboard-dt tr.yui-dt-highlighted td.yui-dt-desc {
+	background-color: #FAEBD7;
+	cursor: default;
+}
+
+.yui-skin-sam .yui-dt.dashboard-dt table .yui-dt-liner {
+	padding: 5px 2px;
+	background-position: top right;
+	word-wrap: break-word;
+	white-space: normal;
+}
+
+.yui-skin-sam .yui-dt.dashboard-dt table thead tr th,
+.yui-skin-sam .yui-dt.dashboard-dt table tfoot tr {
+	background: #E0E0E0;
+	border: 1px solid #FFFFFF;
+} 
+
+.yui-skin-sam .yui-dt.dashboard-dt table thead tr th, 
+.yui-skin-sam .yui-dt.dashboard-dt table thead tr th a,
+.yui-skin-sam .yui-dt.dashboard-dt table tfoot tr  {
+	color: #4F8ACB;
+	font-weight: bold;
+	font-size: 13px;
+}
+
+.yui-skin-sam .yui-dt.dashboard-dt table tfoot tr.yui-dt-first td  {
+	border-top: 1px solid #FFFFFF;
+}
+
+.yui-skin-sam .yui-dt.dashboard-dt table thead tr th a  {
+	color: #4F8ACB;
+	/* text-decoration: underline; */
+}
+
+.yui-skin-sam .yui-dt.dashboard-dt table thead tr th a img  {
+	text-decoration: none;
+	cursor: default;
+}
+
+.yui-skin-sam .yui-dt.dashboard-dt td.numeric {
+	text-align: right;	
+}
+
+.percent {
+	font-size: 11px; 
+}
+
+.yui-skin-sam .yui-dt.dashboard-dt td.multi-item {
+	text-align:center;
+}
+
+.yui-skin-sam .yui-dt.dashboard-dt td.multi-item table.multi-item-table {
+	width: auto;
+	border: none; 
+	display: inline;	
+}
+
+.yui-skin-sam .yui-dt.dashboard-dt td.multi-item table.multi-item-table tr {
+	background-color: transparent;
+}
+
+.yui-skin-sam .yui-dt.dashboard-dt td.multi-item table td.multi-item-td {
+	border: none;
+	margin: 0px; 
+	padding: 0px 2px;
+}
+
+.yui-dt.dashboard-dt.halfsize{
+	width:48%;
+	
+}
+
